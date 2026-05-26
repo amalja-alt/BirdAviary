@@ -525,55 +525,41 @@ public partial class Form1 : Form
         EventArgs e
     )
     {
-        if (string.IsNullOrWhiteSpace(txtBirdName.Text))
-{
-    MessageBox.Show(
-        "Bird Name field is required!",
-        "Validation Error",
-        MessageBoxButtons.OK,
-        MessageBoxIcon.Warning
-    );
+        if (string.IsNullOrWhiteSpace(txtRingId.Text))
+        {
+            MessageBox.Show(
+                "Ring ID field is required!",
+                "Validation Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
 
-    txtBirdName.Focus();
+            txtRingId.Focus();
 
-    return;
-}
-
-if (
-    !txtBirdName.Text
-    .All(c => char.IsLetter(c) || c == ' ')
-)
-{
-    MessageBox.Show(
-        "Bird Name must contain letters only!",
-        "Validation Error",
-        MessageBoxButtons.OK,
-        MessageBoxIcon.Warning
-    );
-
-    txtBirdName.Focus();
-
-    return;
-}
-
-if (txtBirdName.Text.Trim().Length < 2)
-{
-    MessageBox.Show(
-        "Bird Name is too short!",
-        "Validation Error",
-        MessageBoxButtons.OK,
-        MessageBoxIcon.Warning
-    );
-
-    txtBirdName.Focus();
-
-    return;
-}
+            return;
+        }
 
         if (string.IsNullOrWhiteSpace(txtBirdName.Text))
         {
             MessageBox.Show(
                 "Bird Name field is required!",
+                "Validation Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
+
+            txtBirdName.Focus();
+
+            return;
+        }
+
+        if (
+            !txtBirdName.Text
+            .All(c => char.IsLetter(c) || c == ' ')
+        )
+        {
+            MessageBox.Show(
+                "Bird Name must contain letters only!",
                 "Validation Error",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning
@@ -633,6 +619,23 @@ if (txtBirdName.Text.Trim().Length < 2)
         {
             MessageBox.Show(
                 "Color field is required!",
+                "Validation Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
+
+            txtColor.Focus();
+
+            return;
+        }
+
+        if (
+            !txtColor.Text
+            .All(c => char.IsLetter(c) || c == ' ')
+        )
+        {
+            MessageBox.Show(
+                "Color must contain letters only!",
                 "Validation Error",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning
@@ -787,11 +790,48 @@ if (txtBirdName.Text.Trim().Length < 2)
     {
         var birds =
             databaseService
-            .GetAllBirds()
-            .OrderByDescending(
-                b => b.HatchYear
-            )
-            .ToList();
+            .GetAllBirds();
+
+        var watch =
+            System.Diagnostics
+            .Stopwatch
+            .StartNew();
+
+        /*
+        =========================
+        OLD BUBBLE SORT VERSION
+        =========================
+
+        for (int i = 0; i < birds.Count - 1; i++)
+        {
+            for (int j = 0; j < birds.Count - i - 1; j++)
+            {
+                if (
+                    birds[j].HatchYear <
+                    birds[j + 1].HatchYear
+                )
+                {
+                    var temp = birds[j];
+
+                    birds[j] = birds[j + 1];
+
+                    birds[j + 1] = temp;
+                }
+            }
+        }
+
+        =========================
+        END OLD VERSION
+        =========================
+        */
+
+        QuickSort(
+            birds,
+            0,
+            birds.Count - 1
+        );
+
+        watch.Stop();
 
         dgvBirds.Rows.Clear();
 
@@ -809,8 +849,87 @@ if (txtBirdName.Text.Trim().Length < 2)
         }
 
         MessageBox.Show(
-            "Birds sorted successfully!"
+            $"Sort completed in {watch.ElapsedMilliseconds} ms"
         );
+    }
+
+    private void QuickSort(
+        List<Bird> birds,
+        int left,
+        int right
+    )
+    {
+        if (left >= right)
+        {
+            return;
+        }
+
+        int pivot =
+            birds[(left + right) / 2]
+            .HatchYear;
+
+        int index =
+            Partition(
+                birds,
+                left,
+                right,
+                pivot
+            );
+
+        QuickSort(
+            birds,
+            left,
+            index - 1
+        );
+
+        QuickSort(
+            birds,
+            index,
+            right
+        );
+    }
+
+    private int Partition(
+        List<Bird> birds,
+        int left,
+        int right,
+        int pivot
+    )
+    {
+        while (left <= right)
+        {
+            while (
+                birds[left].HatchYear >
+                pivot
+            )
+            {
+                left++;
+            }
+
+            while (
+                birds[right].HatchYear <
+                pivot
+            )
+            {
+                right--;
+            }
+
+            if (left <= right)
+            {
+                var temp = birds[left];
+
+                birds[left] =
+                    birds[right];
+
+                birds[right] =
+                    temp;
+
+                left++;
+                right--;
+            }
+        }
+
+        return left;
     }
 
     private void RefreshBirdList()
@@ -835,7 +954,7 @@ if (txtBirdName.Text.Trim().Length < 2)
         }
 
         lblBirdCount.Text =
-            $"Birds: {birds.Count}";
+            $"סה\"כ ציפורים: {birds.Count}";
 
         if (birds.Count > 0)
         {
