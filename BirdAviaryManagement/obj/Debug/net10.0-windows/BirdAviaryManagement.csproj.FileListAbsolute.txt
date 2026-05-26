@@ -41,3 +41,6 @@ C:\Users\WIN10\OneDrive\שולחן העבודה\BirdAviaryManagement\BirdAviaryM
 C:\Users\WIN10\OneDrive\שולחן העבודה\BirdAviaryManagement\BirdAviaryManagement\bin\Debug\net10.0-windows\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\WIN10\OneDrive\שולחן העבודה\BirdAviaryManagement\BirdAviaryManagement\obj\Debug\net10.0-windows\BirdAviaryManagement.csproj.AssemblyReference.cache
 C:\Users\WIN10\OneDrive\שולחן העבודה\BirdAviaryManagement\BirdAviaryManagement\obj\Debug\net10.0-windows\BirdAvia.15701A5D.Up2Date
+C:\Users\WIN10\OneDrive\שולחן העבודה\BirdAviaryManagement\BirdAviaryManagement\obj\Debug\net10.0-windows\BirdAviaryManagement.sourcelink.json
+C:\Users\WIN10\OneDrive\שולחן העבודה\BirdAviaryManagement\BirdAviaryManagement\bin\Debug\net10.0-windows\Castle.Core.dll
+C:\Users\WIN10\OneDrive\שולחן העבודה\BirdAviaryManagement\BirdAviaryManagement\bin\Debug\net10.0-windows\Moq.dll

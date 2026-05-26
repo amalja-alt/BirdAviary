@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BirdAviaryManagement")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21534df1a1a47eebd2163c594bc67f5adcd9716e")]
 [assembly: System.Reflection.AssemblyProductAttribute("BirdAviaryManagement")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BirdAviaryManagement")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
